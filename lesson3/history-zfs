@@ -1,0 +1,74 @@
+      lsblk
+
+    #Проверяем релиз CentOS
+      cat /etc/redhat-release
+
+    # Устанавливаем репозиторий ZFS
+      sudo yum install -y http://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm
+
+    #  Отключаем DKMS и ставим kABI
+      vi /etc/yum.repos.d/zfs.repo
+      yum install -y zfs
+      reboot
+
+    #  Включаем модуль ядра ZFS
+      modprobe zfs
+      lsmod | grep zfs
+
+    # Создаем пул из двух дисков с кэшем на третьем
+      zpool create mypool sdb sdc cache sdd
+      zpool list mypool
+
+    #  Создаем файловую систему в пуле
+      zfs create mypool/opt
+      ls -a /opt
+
+   # Копируем содержимое папки /opt в фс /mypool/opt
+      cp -pR /opt/VBoxGuestAdditions-6.0.0 /mypool/opt
+      rm -Rf /opt
+
+   # Монтируем mypool/opt в /opt
+      zfs set mountpoint=/opt mypool/opt
+      ls -a /opt
+      mount | grep /opt
+
+   # Устанавливаем zfs-autosnapshot
+      yum -y install wget
+      wget https://github.com/zfsonlinux/zfs-auto-snapshot/archive/master.zip
+      yum -y install unzip
+      cd zfs-auto-snapshot-master
+      unzip master.zip
+      cd zfs-auto-snapshot-master
+      make install
+
+   # Устанавливаем переменные фс для скрипта в крон
+      zfs set com.sun:auto-snapshot=true mypool/opt
+      zfs set snapdir=visible mypool/opt
+
+   # Скрипт в крон ежедневные снэпшоты хранить месяц
+      vi /etc/cron.daily/autosnap
+      zfs list -t snapshot
+   #  zfs set com.sun:auto-snapshot:frequent=true mypool/opt
+   #  zfs set com.sun:auto-snapshot:hourly=true mypool/opt
+   #  zfs set com.sun:auto-snapshot:dayly=true mypool/opt
+   #  zfs set com.sun:auto-snapshot:weekly=true mypool/opt
+
+   # frequent snapshots every 15 mins, keeping 4 snapshots
+   # hourly snapshots every hour, keeping 24 snapshots
+   # daily snapshots every day, keeping 31 snapshots
+   # weekly snapshots every week, keeping 7 snapshots
+   # monthly snapshots every month, keeping 12 snapshots
+
+   #  zfs list -t snapshot
+
+   # Проверяем восстановление со снэпшота
+      touch /opt/test
+      zfs list -t snapshot
+      zfs snapshot mypool/opt@test-snap
+      zfs list -t snapshot
+      touch /opt/test1
+      zfs list -t snapshot
+      ls /opt
+      zfs rollback mypool/opt@test-snap
+      ls /opt
+
