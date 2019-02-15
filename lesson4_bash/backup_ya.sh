@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 timestamp="`date +'%d_%m_%Y'`" #Получить текущую дату
-backupdir="/root/backup" #каталог для бэкапов
+backupdir="/user1/backup" #каталог для бэкапов
 srcdir="/var/www" #что бэкапируем
 mysqlhost="127.0.0.1" #хост мускула
 mysqluser="user"
