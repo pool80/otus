@@ -8,7 +8,7 @@ dbname="test" # имя базы данных
 
 #отправка почты
 mailError(){
-  echo "Лог ошибки" | mailx -s "Ошибка резервного копирования" -A ~/logs/error.log oleg@pool80.ru
+  echo "Ошибка резервного копирования" | sendmail oleg@pool80.ru
 }
 
 #лог ошибок
