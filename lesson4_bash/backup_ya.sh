@@ -19,7 +19,7 @@ checkErr(){
 
 
 #бэкап mysql
-mysqldump --opt $dbname > $backupdir/backup.sql | tar -cpzf $backupdir/backup_$timestamp.tar.gz backup.sql
+mysqldump --opt $dbname > $backupdir/backup.sql | tar -cpzf $backupdir/backupsql_$timestamp.tar.gz backup.sql
 rm $backupdir/backup.sql
 
 if [[ $? -gt 0 ]];then
@@ -35,7 +35,7 @@ if [[ $? -gt 0 ]];then
 fi
 
 #отправка бэкапов на яндекс диск
-curl -T $backupdir/backup_$timestamp.sql --user "user:passwd" https://webdav.yandex.ru/backup_$timestamp.sql
+curl -T $backupdir/backupsql_$timestamp.tar.gz --user "user:passwd" https://webdav.yandex.ru/backupsql_$timestamp.tar.gz
 if [[ $? -gt 0 ]];then
   checkErr "Ошибка отправки бэкапа мускула"
   exit 1
