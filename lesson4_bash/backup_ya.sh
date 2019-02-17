@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
 timestamp=`date +'%d_%m_%Y'` #Получить текущую дату
-backupdir="/user1/backup" #каталог для бэкапов
+backupdir="/root/backup" #каталог для бэкапов
 srcdir="/var/www" #что бэкапируем
-mysqlhost="127.0.0.1" #хост мускула
-mysqluser="user"
-mysqlpass="pass"
 dbname="test" # имя базы данных
 
 
@@ -22,11 +19,14 @@ checkErr(){
 
 
 #бэкап mysql
-mysqldump -h $mysqlhost -u $mysqluser -p $mysqlpass >$backupdir/backup_$timestamp.sql
+mysqldump --opt $dbname > $backupdir/backup.sql | tar -cpzf $backupdir/backup_$timestamp.tar.gz backup.sql
+rm $backupdir/backup.sql
+
 if [[ $? -gt 0 ]];then
   checkErr "Резервное копирование базы данных завершилось ошибкой"
   exit 1
 fi
+
 #бэкап сайта
 tar -czpf $backupdir/backup_$timestamp.tar.gz $srcdir
 if [[ $? -gt 0 ]];then
