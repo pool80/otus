@@ -6,27 +6,27 @@
 * init=/bin/sh
 
 Добавить init=/bin/sh в конце строки начинающейся с linux16
-![](https://prnt.sc/mokzze)
+![](pic/bin_sh.png)
 
 Перемонтируем систему в Read-Write
 Проверить mount | grep root
-![](https://prnt.sc/mokqrk)
+![](pic/bin_sh1.png)
 
 * rd.break
 
 В конце строки начинающейся с linux16 добавляем rd.break и нажимаем сtrl-x для загрузки в систему
-![](https://prnt.sc/mol3rr)
+![](pic/rd.break.png)
 
 Попадаем в emergency mode. Перемонтируем систему в Read-Write, меняем пароль
-![](https://prnt.sc/mol25i)
+![](pic/rd.break1.png)
 
 * rw init=/sysroot/bin/sh
 
 Заменить ro на rw init=/sysroot/bin/sh
-![](https://prnt.sc/molb2v)
+![](pic/rw_init.png)
 
 Сделать chroot /sysroot, сменить passwd, touch /.autorelabel
-![](https://prnt.sc/molc6u)
+![](pic/rw_init1.png)
 
 В способах c rd.break и rw init=/sysroot/bin/sh после перезагрузки из терминала система зависала и требовала 
 перезагрузки из интерфейса  virtual box или VMware, после чего нормально стартовала.
@@ -96,4 +96,4 @@ lsinitrd -m /boot/initramfs-$(uname -r).img | grep test
 
 Убрать опции rghb и quiet в grub.cfg.
 
-![](https://github.com/pool80/otus/tree/master/lesson7_boot/pic/dracut_hello.jpg)
+![](pic/dracut_hello.jpg)
