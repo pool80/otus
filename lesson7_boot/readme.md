@@ -5,36 +5,36 @@
 
 * init=/bin/sh
 
-Добавить init=/bin/sh в конце строки начинающейся с linux16
+    Добавить init=/bin/sh в конце строки начинающейся с linux16
 ![](pic/bin_sh.png)
 
-Перемонтируем систему в Read-Write
-Проверить mount | grep root
+    Перемонтируем систему в Read-Write
+    Проверить mount | grep root
 ![](pic/bin_sh1.png)
 
 * rd.break
 
-В конце строки начинающейся с linux16 добавляем rd.break и нажимаем сtrl-x для загрузки в систему
+    В конце строки начинающейся с linux16 добавляем rd.break и нажимаем сtrl-x для загрузки в систему
 ![](pic/rd.break.png)
 
-Попадаем в emergency mode. Перемонтируем систему в Read-Write, меняем пароль
+    Попадаем в emergency mode. Перемонтируем систему в Read-Write, меняем пароль
 ![](pic/rd.break1.png)
 
 * rw init=/sysroot/bin/sh
 
-Заменить ro на rw init=/sysroot/bin/sh
+    Заменить ro на rw init=/sysroot/bin/sh
 ![](pic/rw_init.png)
 
-Сделать chroot /sysroot, сменить passwd, touch /.autorelabel
+    Сделать chroot /sysroot, сменить passwd, touch /.autorelabel
 ![](pic/rw_init1.png)
 
-В способах c rd.break и rw init=/sysroot/bin/sh после перезагрузки из терминала система зависала и требовала 
-перезагрузки из интерфейса  virtual box или VMware, после чего нормально стартовала.
+    В способах c rd.break и rw init=/sysroot/bin/sh после перезагрузки из терминала система зависала и требовала 
+    перезагрузки из интерфейса  virtual box или VMware, после чего нормально стартовала.
 
  
 2. Установить систему с LVM, после чего переименовать VG
 
-https://asciinema.org/a/cJaeBiEgPHw2f8v0BP7oS1VDT
+    https://asciinema.org/a/cJaeBiEgPHw2f8v0BP7oS1VDT
 
 3. Добавить модуль в initrd
 
@@ -88,12 +88,12 @@ https://asciinema.org/a/cJaeBiEgPHw2f8v0BP7oS1VDT
     ```  
     </details>
 
-Пересобрать образ initrd 
-mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
+    Пересобрать образ initrd 
+    mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)
 
-Посмотреть модули dracut
-lsinitrd -m /boot/initramfs-$(uname -r).img | grep test
+    Посмотреть модули dracut
+    lsinitrd -m /boot/initramfs-$(uname -r).img | grep test
 
-Убрать опции rghb и quiet в grub.cfg.
+    Убрать опции rghb и quiet в grub.cfg.
 
 ![](pic/dracut_hello.jpg)
