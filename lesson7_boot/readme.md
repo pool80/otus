@@ -96,4 +96,4 @@ lsinitrd -m /boot/initramfs-$(uname -r).img | grep test
 
 Убрать опции rghb и quiet в grub.cfg.
 
-![](//pic/dracut_hello.jpg)
+![](https://github.com/pool80/otus/tree/master/lesson7_boot/pic/dracut_hello.jpg)
