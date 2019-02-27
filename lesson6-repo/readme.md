@@ -2,6 +2,11 @@
 ----------------------------------------
     Для создания своего репозитория использую 
     2 виртуальные машины Centos7 Vagrant boxes
+    
+сервер https://yadi.sk/d/qdnerL4NDKCJjw
+    
+клиент https://yadi.sk/d/DFsCTt0YFVrGiQ
+    
     Для обьединения машин в Vagrantfile добавил параметры:
     
     сервер    
@@ -41,6 +46,18 @@ yum -y update
 >browse - добавляем доступ к листингу каталога в caddy.conf
 
 vi /etc/caddy/caddy.conf
+<details>
+<summary><code>caddy.conf</code></summary>
+
+    :80 {
+        gzip
+        root /usr/share/caddy
+        browse
+    }
+
+    import conf.d/*.conf
+
+</details>
 
 systemctl restart caddy
 
