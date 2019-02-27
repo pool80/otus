@@ -43,7 +43,7 @@ createrepo /usr/share/caddy/repo
 
 yum -y update
 
->browse - добавляем доступ к листингу каталога в caddy.conf
+    browse - добавляем доступ к листингу каталога в caddy.conf
 
 vi /etc/caddy/caddy.conf
 <details>
@@ -61,7 +61,8 @@ vi /etc/caddy/caddy.conf
 
 systemctl restart caddy
 
->добавляем репозиторий
+    добавляем репозиторий
+    
 <details>
 <summary><code>otus.repo</code></summary>
     
@@ -74,11 +75,13 @@ systemctl restart caddy
 </details>
 vi  /etc/yum.repos.d/otus.repo
 
->открываем 
+    открываю 80 порт
 
 iptables -I INPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT
 
->теперь запускаю клиентскую машину, проверяю пинг, подключаю репозиторий
+    теперь запускаю клиентскую машину, проверяю пинг, подключаю репозиторий
+
+    устанавливаю caddy из репозитория Otus
 
 <details>
 <summary><code>otus.repo</code></summary>
@@ -90,5 +93,3 @@ iptables -I INPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT
     enabled=1
     
 </details>
-
->устанавливаю caddy из репозитория Otus
