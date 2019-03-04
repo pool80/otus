@@ -1,0 +1,27 @@
+vi /etc/sysconfig/watchlog
+vi /var/log/watchlog.log
+vi /opt/watchlog.sh
+chmod +x /opt/watchlog.sh
+vi /etc/systemd/system/watchlog.service
+vi /etc/systemd/system/watchlog.timer
+systemctl start watchlog.timer
+tail -f /var/log/messages
+
+yum install epel-release -y && yum install spawn-fcgi php php-cli mod_fcgid httpd -y
+vi /etc/sysconfig/spawn-fcgi
+vi /etc/systemd/system/spawn-fcgi.service
+systemctl start spawn-fcgi
+systemctl status spawn-fcgi
+
+vi /etc/systemd/system/httpd@.service
+cp /etc/sysconfig/httpd /etc/sysconfig/httpd-first
+cp /etc/sysconfig/httpd /etc/sysconfig/httpd-second
+vi /etc/sysconfig/httpd-first
+vi /etc/sysconfig/httpd-second
+cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/first.conf 
+cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/second.conf 
+vi /etc/httpd/conf/first.conf
+vi /etc/httpd/conf/second.conf
+systemctl start httpd@first
+systemctl start httpd@second
+ss -tnulp | grep httpd

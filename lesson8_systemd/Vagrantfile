@@ -1,0 +1,13 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+  config.vm.synced_folder ".", "/vagrant", type: "rsync",
+    rsync__exclude: ".git/"
+  config.vm.provision "shell",
+    inline: <<-SHELL
+      yum install epel-release -y && yum install spawn-fcgi php php-cli mod_fcgid httpd -y
+      /bin/sh /vagrant/scripts/watchlog.sh
+      /bin/sh /vagrant/scripts/spawn_fcgi.sh
+      /bin/sh /vagrant/scripts/httpd.sh
+
+  SHELL
+end
