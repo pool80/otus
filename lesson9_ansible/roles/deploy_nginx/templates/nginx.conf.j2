@@ -1,0 +1,30 @@
+worker_processes  {{ worker_processes }};
+error_log /var/log/nginx/error.log;
+pid /run/nginx.pid;
+
+events {
+    worker_connections  {{ worker_connections }};
+}
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on; 
+    keepalive_timeout  {{ keepalive_timeout }};
+
+    server {
+        listen {{ nginx_port }};
+        server_name test_server;
+
+        location / {
+            root   html;
+            index index.html index.htm;
+        }
+
+        error_page   500 502 503 504  /50x.html;
+            location = /50x.html {
+                root   html;
+        }
+    }
+}

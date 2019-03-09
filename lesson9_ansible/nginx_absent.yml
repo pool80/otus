@@ -1,0 +1,9 @@
+---
+- name: Uninstall default Web Server
+  hosts: test_servers
+  become: yes
+
+  tasks:
+  - name: Uninstall Web server
+    yum: name=nginx state=absent
+...

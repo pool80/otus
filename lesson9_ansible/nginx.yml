@@ -1,0 +1,7 @@
+---
+- name: Configure webserver with nginx
+  hosts: test_servers
+  become: True
+
+  roles:
+    - deploy_nginx 

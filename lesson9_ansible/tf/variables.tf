@@ -1,0 +1,9 @@
+variable "region" {}
+variable "gcp_project" {}
+variable "credentials" {}
+variable "name" {}
+variable "zone" {}
+variable "machine" {}
+variable "private_key_path" {}
+variable "ssh_username" {}
+variable "subnet_cidr" {}
