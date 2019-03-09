@@ -17,7 +17,9 @@
 
 Развернул машину в google cloud с помощью terraform. Terraform получает данные из credential.json.
 
+```
 IAM и  администрировние > Сервисные аккаунты > Создать аккаунт
+```
 
 Доступ по SSH сделал через скрипт в Terraform, путь к  ключу ~/.ssh/id_rsa.pub
 
