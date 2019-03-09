@@ -2,6 +2,7 @@
 .vscode/
 .vagrant/
 .terraform/
+tests/
 credentials.json
 terraform.tfstate
 terraform.tfstate.backup
