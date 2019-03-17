@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+holidays=(3012 3112 0101 0201 0301 0401 0501 0601 0701 0801 2302 2402 0803
+0903 1003 0105 0205 0305 0405 0505 0905 1005 1105 1205 1206 0211 0311 0411)
+
+if [[ ! $(groups "$PAM_USER" | grep admin) ]]
+    then 
+        if [[ ${holidays[*]}  =~  $(date +%d%m) ]]
+            then
+                exit 1
+        fi
+else
+    exit 0    
+fi
