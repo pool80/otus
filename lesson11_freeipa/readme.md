@@ -24,7 +24,7 @@ ansible-playbook freeipaclient.yml
 
 #### Пруфшот
 
-![Снимок экрана от 2019-04-05 00-05-29](./Снимок экрана от 2019-04-05 00-05-29.png)
+![screen](screen.png)
 
 
 
