@@ -1,0 +1,3 @@
+ssh-keygen -t rsa -C oleg@pool80.ru
+cat /root/.ssh/id_rsa.pub
+ipa user-mod admin --sshpubkey="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDavsg1esa1ZZi63eDchjyB2EmqnnO0ypJa40Z3z2O+I+4IYu9R8XrOJCgrIA6WIWtIvRmC5MzNRq/J8KbW2o4LOlfQMnSemL6mos58wJ1z/gb99/yGt23kw5fh2LkzJs0PElB8AqHsieAzKBGOkjh3JsYmC266GYlFCC9wxrPv2t+BgrjC2MI01d019PS9YubZmify/zCuaepGEDyF1btVbxkeWcMFXhfAcC9XebFUtxWsgLn5tg279u76p/Z9CctclQ7TKnFp1aVeH810KC9wNUs4xQtmTHVkE+kP6xRcLrsuZpp43UPaqeWd6TeY+KAN6GOIcv2xbRVryh4Z2PB9 oleg@pool80.ru"

@@ -1,0 +1,11 @@
+---
+- name: Configure freeipa server
+  hosts: freeipasrv
+  become: True
+  roles:
+    - role: freeipasrv
+      ipa_realm: OTUS.TEST
+      ipa_domain: otus.test
+      ipa_server_ip: 192.168.88.50
+      hostname: freeipasrv.otus.test
+...

@@ -1,0 +1,5 @@
+[srv]
+freeipasrv ansible_host=127.0.0.1 ansible_port=2222 ansible_private_key_file=/home/pool80/otus/otus/lesson11_freeipa/.vagrant/machines/freeipasrv/virtualbox/private_key
+
+[client]
+freeipaclient ansible_host=127.0.0.1 ansible_port=2200 ansible_private_key_file=/home/pool80/otus/otus/lesson11_freeipa/.vagrant/machines/freeipaclient/virtualbox/private_key

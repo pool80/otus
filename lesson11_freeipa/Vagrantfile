@@ -1,0 +1,32 @@
+Vagrant.configure(2) do |config|
+    config.vm.box = "centos/7"
+    config.vm.box_check_update = false
+  
+    config.vm.define "freeipasrv" do |freeipasrv|
+      freeipasrv.vm.hostname = "freeipasrv"
+      freeipasrv.vm.network "public_network", ip: "192.168.88.50"
+  
+      freeipasrv.vm.provider "virtualbox" do |vb|
+        vb.memory = 2048
+        vb.cpus = "2"
+      end
+    end
+  
+    config.vm.define "freeipaclient" do |freeipaclient|
+      freeipaclient.vm.hostname = "freeipaclient"
+      freeipaclient.vm.network "public_network", ip: "192.168.88.51"
+    end
+
+    config.vm.provision "shell", inline: <<-SHELL
+    yum update -y
+    systemctl start firewalld
+    systemctl enable firewalld
+    firewall-cmd --permanent --add-port={80/tcp,443/tcp,389/tcp,636/tcp,88/tcp,464/tcp,53/udp,88/udp,464/udp,53/udp,123/udp}
+    firewall-cmd --reload
+    yum install epel-release -y
+    yum install rng-tools -y
+    systemctl start rngd
+    systemctl enable rngd
+    SHELL
+
+end

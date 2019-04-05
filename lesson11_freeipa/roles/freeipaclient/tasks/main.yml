@@ -1,0 +1,19 @@
+---
+- name: install ipa-client
+  yum: name=ipa-client
+
+- name: add ip  in hosts
+  lineinfile: dest=/etc/hosts line='{{ ipa_server_ip }} {{ ipa_server_name }} {{ ipa_server_name }}'
+
+- name: setup ipa-client
+  command: >
+    ipa-client-install -U \
+      -p admin \
+      -w qwerty123 \
+      --server={{ ipa_server_name }} \
+      --ip-address={{ ipa_server_ip }} \
+      --domain={{ ipa_domain }} \
+      --realm={{ ipa_realm }} \
+      --hostname={{ hostname }} \
+      --mkhomedir
+...

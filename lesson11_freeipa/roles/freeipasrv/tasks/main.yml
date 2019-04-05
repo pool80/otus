@@ -1,0 +1,22 @@
+---
+- name: install ipa-server 
+  yum: name=ipa-server-dns
+
+- name: add ip in hosts
+  template: src=hosts.j2 dest=/etc/hosts
+
+- name: add ip resolv.conf
+  lineinfile: dest=/etc/resolv.conf line='nameserver {{ ipa_server_ip }}'
+
+- name: install ipa-server
+  command: >
+    ipa-server-install -U \
+      -r {{ ipa_realm }} \
+      -p qwerty123 \
+      -a qwerty123 \
+      --hostname={{ hostname }} \
+      --ip-address={{ ipa_server_ip }} \
+      --setup-dns \
+      --no-forwarders \
+      --no-reverse
+...
