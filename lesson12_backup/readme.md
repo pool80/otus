@@ -24,11 +24,11 @@
 
 list jobs
 
-![list_jobs](/home/pool80/otus/otus/lesson12_backup/list_jobs.png)
+![list_jobs](list_jobs.png)
 
 
 
 list files
 
-![list_files](/home/pool80/otus/otus/lesson12_backup/list_files.png)
+![list_files](list_files.png)
 
