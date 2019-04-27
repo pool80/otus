@@ -1,0 +1,16 @@
+nginx:
+  image: pool80/nginx:0.1
+  ports:
+      - "8080:8080"
+  links:
+      - php
+  volumes:
+      - ./php/www:/usr/share/nginx/html
+      - ./php/conf:/etc/nginx/conf.d/
+php:
+  image: pool80/php:0.1
+  ports:
+      - "9000:9000"
+  volumes:
+      - ./php/www:/usr/share/nginx/html
+
