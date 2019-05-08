@@ -8,25 +8,25 @@ MACHINES = {
         :box_name => "centos/6",
         #:public => {:ip => '10.10.10.1', :adapter => 1},
         :net => [
-                   {ip: '192.168.255.1', adapter: 2, netmask: "255.255.255.252", virtualbox__intnet: "router-net"},
+                  {ip: '192.168.255.1', adapter: 2, netmask: "255.255.255.252", virtualbox__intnet: "router-net"},
                 ]
   },
 :centralRouter => {
         :box_name => "centos/7",
         :net => [
-									 {ip: '192.168.255.2', adapter: 2, netmask: "255.255.255.252", virtualbox__intnet: "router-net"},
-									 {ip: '192.168.255.5', adapter: 3, netmask: "255.255.255.252", virtualbox__intnet: "router-net"},
-									 {ip: '192.168.255.9', adapter: 4, netmask: "255.255.255.252", virtualbox__intnet: "router-net"},
-									 {ip: '192.168.0.1', adapter: 5, netmask: "255.255.255.192", virtualbox__intnet: "dir-net"},
-									 {ip: '192.168.0.33', adapter: 6, netmask: "255.255.255.192", virtualbox__intnet: "hw-net"},
-									 {ip: '192.168.0.65', adapter: 7, netmask: "255.255.255.192", virtualbox__intnet: "mgt-net"}
+									{ip: '192.168.255.2', adapter: 2, netmask: "255.255.255.252", virtualbox__intnet: "router-net"},
+									{ip: '192.168.255.5', adapter: 3, netmask: "255.255.255.252", virtualbox__intnet: "router-net"},
+									{ip: '192.168.255.9', adapter: 4, netmask: "255.255.255.252", virtualbox__intnet: "router-net"},
+									{ip: '192.168.0.1', adapter: 5, netmask: "255.255.255.192", virtualbox__intnet: "dir-net"},
+									{ip: '192.168.0.33', adapter: 6, netmask: "255.255.255.192", virtualbox__intnet: "hw-net"},
+									{ip: '192.168.0.65', adapter: 7, netmask: "255.255.255.192", virtualbox__intnet: "mgt-net"}
                 ]
   },
   
 :centralServer => {
         :box_name => "centos/7",
         :net => [
-									 {ip: '192.168.0.2', adapter: 2, netmask: "255.255.255.240", virtualbox__intnet: "dir-net"},
+									{ip: '192.168.0.2', adapter: 2, netmask: "255.255.255.240", virtualbox__intnet: "dir-net"},
                 ]
  },
 	
@@ -118,9 +118,7 @@ Vagrant.configure("2") do |config|
 		when "centralServer"
 			box.vm.provision "shell", inline: <<-SHELL
 			echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
-			echo "GATEWAY=192.168.255.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
-			echo "GATEWAY=192.168.255.1" >> /etc/sysconfig/network-scripts/ifcfg-eth2
-			echo "GATEWAY=192.168.255.1" >> /etc/sysconfig/network-scripts/ifcfg-eth3
+			echo "DEVICE=eth1\nBOOTPROTO=static\nBROADCAST=192.168.0.15\nIPADDR=192.168.0.2\nNETMASK=255.255.255.240\nNETWORK=192.168.2.0\nGATEWAY=192.168.0.1\nONBOOT=yes\nDEFROUTE=yes" > /etc/sysconfig/network-scripts/ifcfg-eth1
 			systemctl restart network
 			SHELL
 		when "office1Router"
@@ -143,7 +141,6 @@ Vagrant.configure("2") do |config|
 			sysctl --system
 			echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 			echo "DEVICE=eth1\nBOOTPROTO=static\nBROADCAST=192.168.255.11\nIPADDR=192.168.255.10\nNETMASK=255.255.255.252\nNETWORK=192.168.255.8\nGATEWAY=192.168.255.9\nONBOOT=yes\nDEFROUTE=yes" > /etc/sysconfig/network-scripts/ifcfg-eth1
-			echo "GATEWAY=192.168.255.9" >> /etc/sysconfig/network-scripts/ifcfg-eth1
 			systemctl restart network
 			SHELL
 		when "office2Server"
