@@ -14,7 +14,5 @@ https://nginx.org/ru/docs/http/ngx_http_headers_module.html
 
 Сделано в Vagrantfile c пробросом порта.
 
-```
 ![screen](screen.png)
-```
 
