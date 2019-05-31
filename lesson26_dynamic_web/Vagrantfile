@@ -1,0 +1,24 @@
+Vagrant.configure(2) do |config|
+    config.vm.box = "centos/7"
+    config.vm.box_check_update = false
+    config.vm.network "forwarded_port", guest: 8008, host: 8008
+    config.vm.network "forwarded_port", guest: 8081, host: 8081
+    config.vm.network "forwarded_port", guest: 8082, host: 8082
+  
+  
+    config.vm.provision "file", source: "/home/pool80/otus/lesson26_dynamic_web/conf", destination: "~"
+    config.vm.provision "shell", inline: <<-SHELL
+    yum update -y
+    yum install epel-release -y
+    yum install nginx vim yum-utils wget -y
+    systemctl start nginx
+    systemctl enable nginx
+    cp ~vagrant/nginx.conf /etc/nginx/conf.d/wp.conf
+    yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm -y
+    yum-config-manager -y --enable remi-php72
+    yum install -y php72 php72-php-fpm php72-php-mysqlnd php72-php-opcache php72-php-xml \
+    php72-php-xmlrpc php72-php-gd php72-php-mbstring php72-php-json
+    systemctl start php72-php-fpm
+    systemctl enable php72-php-fpm
+    SHELL
+end
