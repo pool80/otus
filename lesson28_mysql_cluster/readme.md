@@ -25,7 +25,9 @@ https://docs.docker.com/compose/install/
 
 
 
-**mysql-shell:** создаю контейнер **mysql-shell-batch** из Dockerfile: делает запуск js скрипта  для инициализации кластера и добавления нод в кластер + добавляет тестовую базу 
+**mysql-shell** 
+
+создаю контейнер **mysql-shell-batch** из Dockerfile - делает запуск js скрипта  для инициализации кластера и добавления нод в кластер + добавляет тестовую базу 
 
 ```
 docker build -t pool80/mysql-shell-batch:0.1 .
@@ -35,11 +37,15 @@ docker push pool80/mysql-shell-batch
 
 
 
-**mysql-shell-batch** папка со скриптом js и тестовой базой примонтирована в 
+**mysql-shell-batch** 
+
+папка со скриптом js и тестовой базой примонтирована в контейнер
 
 
 
-**mysql-router** проброс порта  **6446**
+**mysql-router** 
+
+проброс порта  **6446**
 
 
 
