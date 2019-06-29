@@ -6,3 +6,5 @@ tests/
 credentials.json
 terraform.tfstate
 terraform.tfstate.backup
+lesson12_backup/history
+lesson18_network/Vagrantfile.work

@@ -1,0 +1,37 @@
+    1  setenforce 0
+    2  yum -y install epel-release
+    3  yum -y install nginx
+    4  systemctl start nginx
+    5  systemctl enable nginx
+    6  rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+    7  yum install -y php71w php71w-curl php71w-common php71w-cli php71w-mysql php71w-mbstring php71w-fpm php71w-xml php71w-pdo php71w-zip
+    8  vim /etc/php.ini
+    9  vim /etc/php-fpm.d/www.conf
+   10  systemctl start php-fpm
+   11  systemctl enable php-fpm
+   12  yum -y install mariadb mariadb-server
+   13  systemctl start mariadb
+   14  systemctl enable mariadb
+   15  mysql_secure_installation
+   16  curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/bin --filename=composer
+   17  composer
+   18  mkdir -p /var/www/laravel
+   19  cd /etc/nginx
+   20  ls
+   21  vim nginx.conf
+   22  nginx -t
+   23  vim nginx.conf
+   24  nginx -t
+   25  nginx -s reload
+   26  systemctl restart nginx
+   27  yum -y install unzip
+   28  cd /var/www/laravel
+   29  composer create-project laravel/laravel .
+   30  chown -R nginx:root /var/www/laravel
+   31  chmod 755 /var/www/laravel/storage
+   32  cd /etc/nginx
+   33  vim nginx.conf
+   34  systemctl restart nginx
+   36  systemctl status nginx
+   37  curl localhost:8080
+   38  history
