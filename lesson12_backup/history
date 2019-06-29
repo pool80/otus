@@ -1,0 +1,8 @@
+vi /etc/sysconfig/selinux
+systemctl start firewalld
+systemctl enable firewalld
+firewall-cmd --list-services
+firewall-cmd --add-service=postgresql
+#firewall-cmd --remove-service=postgresql
+firewall-cmd --add-port={9101,9102,9103}/tcp --permanent
+firewall-cmd --reload
